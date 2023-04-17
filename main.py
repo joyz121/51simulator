@@ -112,27 +112,8 @@ class Sim_MainWindow(QMainWindow):
     #Refresh memory
     def refresh_memory(self):
         #SFR
-        self.memory_dock.Sfr_tableWidget.setItem(0,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['ACC']]))
-        self.memory_dock.Sfr_tableWidget.setItem(1,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['B']]))
-        self.memory_dock.Sfr_tableWidget.setItem(2,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['PSW']]))
-        self.memory_dock.Sfr_tableWidget.setItem(3,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['SP']]))
-        self.memory_dock.Sfr_tableWidget.setItem(4,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['DPH']]))
-        self.memory_dock.Sfr_tableWidget.setItem(5,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['DPL']]))
-        self.memory_dock.Sfr_tableWidget.setItem(6,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['P0']]))
-        self.memory_dock.Sfr_tableWidget.setItem(7,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['P1']]))
-        self.memory_dock.Sfr_tableWidget.setItem(8,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['P2']]))
-        self.memory_dock.Sfr_tableWidget.setItem(9,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['P3']]))
-        self.memory_dock.Sfr_tableWidget.setItem(10,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['IP']]))
-        self.memory_dock.Sfr_tableWidget.setItem(11,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['IE']]))
-        self.memory_dock.Sfr_tableWidget.setItem(12,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['TMOD']]))
-        self.memory_dock.Sfr_tableWidget.setItem(13,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['TCON']]))
-        self.memory_dock.Sfr_tableWidget.setItem(14,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['TH0']]))
-        self.memory_dock.Sfr_tableWidget.setItem(15,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['TL0']]))
-        self.memory_dock.Sfr_tableWidget.setItem(16,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['TH1']]))
-        self.memory_dock.Sfr_tableWidget.setItem(17,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['TL1']]))
-        self.memory_dock.Sfr_tableWidget.setItem(18,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['SCON']]))
-        self.memory_dock.Sfr_tableWidget.setItem(19,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['SBUF']]))
-        self.memory_dock.Sfr_tableWidget.setItem(20,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress['PCON']]))
+        for item,key in zip(range(21),sim51.sfrAddress):
+            self.memory_dock.Sfr_tableWidget.setItem(item,1,QTableWidgetItem(sim51.RAM[sim51.sfrAddress[key]]))
         #RAM
         for i in range(0,32):
             for j in  range(0,8):
