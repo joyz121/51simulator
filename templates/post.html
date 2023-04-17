@@ -1,0 +1,115 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}8051 simulator{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/simulator.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if request.session.is_login %}
+    <h1>8051 simulator</h1>
+    <h2>中国计量大学 18工试3班 郑乐</h2>
+    <div class="container" >
+        <div class="content">
+            <div class="left">
+                <form action="/sim/" method="post">
+                    {% csrf_token %}
+                    <textarea class="form-control" rows="15" cols="10" name="web_code">{{code}}</textarea><br>
+                    <input class="btn btn-xs btn-success" type="submit" name="sim" value="仿真">
+                    <input class="btn btn-xs btn-warning" type="submit" name="clear" value="清空">
+                    <input class="btn btn-xs btn-danger" type="submit" name="debug" value="单步" >
+                </form>
+            <textarea class="form-control" row="10" cols="35"name="err_msg">{{error_massage}}</textarea>
+            </div>
+            
+            <div class="mid">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr ><th>SFR</th><th>Value</th></tr>
+                        <tr><td>{{sfr_keys.0}}</td><td>{{sfr_values.0}}</td></tr>
+                        <tr><td>{{sfr_keys.1}}</td><td>{{sfr_values.1}}</td></tr>
+                        <tr><td>{{sfr_keys.2}}</td><td>{{sfr_values.2}}</td></tr>
+                        <tr><td>{{sfr_keys.3}}</td><td>{{sfr_values.3}}</td></tr>
+                        <tr><td>{{sfr_keys.4}}</td><td>{{sfr_values.4}}</td></tr>
+                        <tr><td>{{sfr_keys.5}}</td><td>{{sfr_values.5}}</td></tr>
+                        <tr><td>{{sfr_keys.6}}</td><td>{{sfr_values.6}}</td></tr>
+                        <tr><td>{{sfr_keys.7}}</td><td>{{sfr_values.7}}</td></tr>
+                        <tr><td>{{sfr_keys.8}}</td><td>{{sfr_values.8}}</td></tr>
+                        <tr><td>{{sfr_keys.9}}</td><td>{{sfr_values.9}}</td></tr>
+                        <tr><td>{{sfr_keys.10}}</td><td>{{sfr_values.10}}</td></tr>
+                        <tr><td>{{sfr_keys.11}}</td><td>{{sfr_values.11}}</td></tr>
+                        <tr><td>{{sfr_keys.12}}</td><td>{{sfr_values.12}}</td></tr>
+                        <tr><td>{{sfr_keys.13}}</td><td>{{sfr_values.13}}</td></tr>
+                        <tr><td>{{sfr_keys.14}}</td><td>{{sfr_values.14}}</td></tr>
+                        <tr><td>{{sfr_keys.15}}</td><td>{{sfr_values.15}}</td></tr>
+                        <tr><td>{{sfr_keys.16}}</td><td>{{sfr_values.16}}</td></tr>
+                        <tr><td>{{sfr_keys.17}}</td><td>{{sfr_values.17}}</td></tr>
+                        <tr><td>{{sfr_keys.18}}</td><td>{{sfr_values.18}}</td></tr>
+                        <tr><td>{{sfr_keys.19}}</td><td>{{sfr_values.19}}</td></tr>
+                        <tr><td>{{sfr_keys.20}}</td><td>{{sfr_values.20}}</td></tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="right">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>address</th>
+                            <th>0</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                        </tr>
+                        {% for i in ram %}
+                        <tr>
+                            <td>{{i.0}}</td>
+                            {% if i.9 != "1" %}<td>{{i.1}}</td>
+                            {% else %}<td><font color="red">{{i.1}}</font></td>
+                            {% endif %}
+
+                            {% if i.10 != "1" %}<td>{{i.2}}</td>
+                            {% else %}<td><font color="red">{{i.2}}</font></td>
+                            {% endif %}
+                            
+                            {% if i.11 != "1" %}<td>{{i.3}}</td>
+                            {% else %}<td><font color="red">{{i.3}}</font></td>
+                            {% endif %}
+                            
+                            {% if i.12 != "1" %}<td>{{i.4}}</td>
+                            {% else %}<td><font color="red">{{i.4}}</font></td>
+                            {% endif %}
+                            
+                            {% if i.13 != "1" %}<td>{{i.5}}</td>
+                            {% else %}<td><font color="red">{{i.5}}</font></td>
+                            {% endif %}
+
+                            {% if i.14 != "1" %}<td>{{i.6}}</td>
+                            {% else %}<td><font color="red">{{i.6}}</font></td>
+                            {% endif %}
+
+                            {% if i.15 != "1" %}<td>{{i.7}}</td>
+                            {% else %}<td><font color="red">{{i.7}}</font></td>
+                            {% endif %}
+                            
+                            {% if i.16 != "1" %}<td>{{i.8}}</td>
+                            {% else %}<td><font color="red">{{i.8}}</font></td>
+                            {% endif %}
+
+
+                        </tr>
+                        {% endfor %}
+                    </thead>
+                </table>
+                <p>{{ rlt }}</p>
+            </div>
+        </div>
+
+    </div>
+{% else %}
+    <h1>您尚未登录，无法使用仿真器</h1>
+{% endif %}
+{% endblock %}

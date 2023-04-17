@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	我的网站 | 我的消息
+{% endblock %}
+
+{% block nav_home_active %}active{% endblock %}
+
+{% block content %}
+<div class="container">
+	{% for notification in request.user.notifications.all %}
+		<h1>{{notification}}</h1>
+	{% empty%}
+	<h1>暂无消息</h1>
+	{% endfor %}
+</div>
+{% endblock %}
